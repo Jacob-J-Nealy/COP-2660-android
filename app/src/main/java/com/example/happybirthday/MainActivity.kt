@@ -29,19 +29,19 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-// Edited this section to for Jetpack Compose
-@Preview(showBackground = true)
+
 @Composable
-fun BirthdayCardPreview() {
-    HappyBirthdayTheme {
-        Greeting("Android")
-    }
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     HappyBirthdayTheme {
-        Greeting("Android")
+        Greeting("Jacob")
     }
 }
