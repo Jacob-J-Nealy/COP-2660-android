@@ -27,6 +27,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+// Added New Function
+@Composable
+fun GreetingText() {
+}
 
 @Preview(showBackground = true)
 @Composable
