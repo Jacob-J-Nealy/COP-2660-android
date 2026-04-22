@@ -18,7 +18,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-           
+            HappyBirthdayTheme {
+                Scaffold { padding ->
+                    GreetingText(message = "Happy Birthday Sam!", modifier = Modifier.padding(padding))
+                }
+            }
         }
     }
 }
