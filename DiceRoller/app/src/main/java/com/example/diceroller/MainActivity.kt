@@ -36,6 +36,4 @@ fun DiceRollerApp() {
 }
 
 @Composable
-fun DiceWithButtonAndImage(modifier: Modifier = Modifier
-    .fillMaxSize()
-    .wrapContentSize(Alignment.Center)) {}
+fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {}
