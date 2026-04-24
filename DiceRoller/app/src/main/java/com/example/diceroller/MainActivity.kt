@@ -46,6 +46,7 @@ fun DiceRollerApp() {
 
 @Composable
 fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
+    var result = 1
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -55,7 +56,7 @@ fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
             contentDescription = "1"
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { /* TODO */ }) {
+        Button(onClick = { result = (1..6).random() }) {
             Text(text = stringResource(R.string.roll))
         }
     }
