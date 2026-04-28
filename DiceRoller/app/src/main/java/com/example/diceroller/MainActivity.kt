@@ -27,10 +27,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.diceroller.ui.theme.DiceRollerTheme
 
+// MainActivity class: starting point of the app
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge() // this is a function that makes the app edge to edge
         setContent {
             DiceRollerTheme {
                 DiceRollerApp()
@@ -44,8 +45,8 @@ class MainActivity : ComponentActivity() {
 fun DiceRollerApp() {
     DiceWithButtonAndImage(
         modifier = Modifier
-            .fillMaxSize()
-            .wrapContentSize(Alignment.Center)
+            .fillMaxSize() // modifier to fill the entire screen
+            .wrapContentSize(Alignment.Center) // modifier to center the content
     )
 }
 
