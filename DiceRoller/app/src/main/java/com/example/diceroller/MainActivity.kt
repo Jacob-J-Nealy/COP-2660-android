@@ -61,17 +61,21 @@ fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
         5 -> R.drawable.dice_5
         else -> R.drawable.dice_6
     }
+    // Column to display the image and button vertically and center them
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // loads
         Image(
             painter = painterResource(imageResource),
-            contentDescription = result.toString()
+            contentDescription = result.toString() // accessibility for screen readers
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { result = (1..6).random() }) {
-            Text(text = stringResource(R.string.roll))
+
+        Spacer(modifier = Modifier.height(16.dp)) // adds space between the image and button
+
+        Button(onClick = { result = (1..6).random() }) { // logic to roll the dice
+            Text(text = stringResource(R.string.roll)) // explain this well in presentation
         }
     }
 
