@@ -1,5 +1,6 @@
 package com.example.diceroller
 
+// Imports for the MainActivity class
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
