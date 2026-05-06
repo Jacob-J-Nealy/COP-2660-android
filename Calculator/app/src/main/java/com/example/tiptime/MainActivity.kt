@@ -25,6 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tiptime.ui.theme.TipTimeTheme
 import java.text.NumberFormat
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,14 +79,13 @@ fun TipTimeLayout() {
 
 @Composable
 fun EditNumberField(modifier: Modifier = Modifier) {
-    val amountInput = "0"
+    var amountInput = mutableStateOf("0")
     TextField(
-        value = amountInput,
-        onValueChange = {},
+        value = amountInput.value,
+        onValueChange = { amountInput.value = it },
         modifier = modifier
     )
 }
-
 /**
  * Calculates the tip based on the user input and format the tip amount
  */
