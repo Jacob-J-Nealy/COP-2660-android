@@ -78,7 +78,7 @@ fun TipTimeLayout() {
 fun EditNumberField(modifier: Modifier = Modifier) {
     val amountInput = "0"
     TextField(
-        value = "amountInput",
+        value = amountInput,
         onValueChange = {},
         modifier = modifier
     )
