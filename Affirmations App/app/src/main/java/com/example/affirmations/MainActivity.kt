@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.affirmations.model.Affirmation
 import com.example.affirmations.ui.theme.AffirmationsTheme
+import androidx.compose.foundation.lazy.items
 
 class MainActivity : ComponentActivity() {
 
@@ -87,4 +88,15 @@ fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
 @Composable
 private fun AffirmationCardPreview() {
     AffirmationCard(Affirmation(R.string.affirmation1, R.drawable.image1))
+}
+
+import androidx.compose.foundation.lazy.LazyColumn
+
+@Composable
+fun AffirmationList(affirmationList: List<Affirmation>, modifier: Modifier = Modifier) {
+    LazyColumn(modifier = modifier) {
+        items(affirmationList) {
+
+        }
+    }
 }
