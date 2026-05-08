@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.affirmations.model.Affirmation
 import com.example.affirmations.ui.theme.AffirmationsTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,6 +49,6 @@ fun AffirmationsApp() {
 }
 
 @Composable
-fun AffirmationCard() {
+fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
 
 }
