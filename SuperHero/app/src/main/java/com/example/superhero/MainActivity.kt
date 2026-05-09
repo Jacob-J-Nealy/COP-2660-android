@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SuperheroesTheme() {
-                HeroesScreen()
+                SuperheroesApp()
             }
         }
     }
@@ -39,5 +39,18 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     SuperheroesTheme() {
         Greeting("Android")
+    }
+}
+
+@Composable
+fun SuperheroesApp() {
+    Scaffold(
+        topBar = {
+            WoofTopAppBar()
+        }
+    ) { paddingValues ->
+        HeroesScreen(
+            modifier = Modifier.padding(paddingValues)
+        )
     }
 }
