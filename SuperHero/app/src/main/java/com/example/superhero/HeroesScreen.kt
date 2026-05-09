@@ -72,6 +72,7 @@ fun HeroListItem(
 @Composable
 fun HeroesScreen(modifier: Modifier = Modifier) {
     LazyColumn(
+        modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(
             vertical = 8.dp,
             horizontal = 16.dp
