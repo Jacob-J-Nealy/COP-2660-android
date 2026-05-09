@@ -1,7 +1,6 @@
 package com.example.superheroes.model
 
 import com.example.superhero.R
-import com.example.superheroes.R
 
 object HeroesRepository {
 
