@@ -177,7 +177,7 @@ private fun shareSoldDessertsInformation(intentContext: Context, dessertsSold: I
 private fun DessertClickerApp(
     desserts: List<Dessert>
 ) {
-    val viewModel: DessertViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    val viewModel: DessertViewModel = viewModel()
     val uiState = viewModel.uiState
 
     val currentDessert = desserts[uiState.currentDessertIndex]
