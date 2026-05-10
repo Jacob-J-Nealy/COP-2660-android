@@ -72,7 +72,7 @@ import androidx.core.content.ContextCompat
 import com.example.dessertclicker.data.Datasource
 import com.example.dessertclicker.model.Dessert
 import com.example.dessertclicker.ui.theme.DessertClickerTheme
-
+import androidx.lifecycle.viewmodel.compose.viewModel
 private const val TAG = "MainActivity"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -177,22 +177,16 @@ private fun shareSoldDessertsInformation(intentContext: Context, dessertsSold: I
 private fun DessertClickerApp(
     desserts: List<Dessert>
 ) {
+    val viewModel: DessertViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    val uiState = viewModel.uiState
 
-    var uiState by rememberSaveable {
-        mutableStateOf(DessertUiState())
-    }
-
-    var currentDessertPrice by rememberSaveable {
-        mutableStateOf(desserts[uiState.currentDessertIndex].price)
-    }
-    var currentDessertImageId by rememberSaveable {
-        mutableStateOf(desserts[uiState.currentDessertIndex].imageId)
-    }
+    val currentDessert = desserts[uiState.currentDessertIndex]
 
     Scaffold(
         topBar = {
             val intentContext = LocalContext.current
             val layoutDirection = LocalLayoutDirection.current
+
             DessertClickerAppBar(
                 onShareButtonClicked = {
                     shareSoldDessertsInformation(
@@ -213,24 +207,28 @@ private fun DessertClickerApp(
             )
         }
     ) { contentPadding ->
+
         DessertClickerScreen(
             revenue = uiState.revenue,
             dessertsSold = uiState.dessertsSold,
-            dessertImageId = currentDessertImageId,
+            dessertImageId = currentDessert.imageId,
             onDessertClicked = {
 
-                uiState = uiState.copy(
-                    revenue = uiState.revenue + currentDessertPrice,
-                    dessertsSold = uiState.dessertsSold + 1
-                )
+                // 1. Update score in ViewModel
+                viewModel.onDessertClicked(currentDessert.price)
 
+                // 2. Get updated state AFTER click
+                val updatedState = viewModel.uiState
+
+                // 3. Compute next dessert
                 val dessertToShow = determineDessertToShow(
                     desserts,
-                    uiState.dessertsSold
+                    updatedState.dessertsSold
                 )
 
-                currentDessertImageId = dessertToShow.imageId
-                currentDessertPrice = dessertToShow.price
+                // 4. Update index in ViewModel
+                val newIndex = desserts.indexOf(dessertToShow)
+                viewModel.updateDessert(newIndex)
             },
             modifier = Modifier.padding(contentPadding)
         )
