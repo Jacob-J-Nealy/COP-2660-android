@@ -1,4 +1,8 @@
 package com.example.dessertclicker
 
-class DessertViewModel {
+import androidx.lifecycle.ViewModel
+
+
+class DessertViewModel : ViewModel() {
+
 }
