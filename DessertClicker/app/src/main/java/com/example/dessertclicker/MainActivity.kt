@@ -53,6 +53,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -180,7 +181,9 @@ private fun DessertClickerApp(
     val viewModel: DessertViewModel = viewModel()
     val uiState = viewModel.uiState
 
-    val currentDessert = desserts[uiState.currentDessertIndex]
+    LaunchedEffect(Unit) {
+        viewModel.initialize(desserts)
+    }
 
     Scaffold(
         topBar = {
@@ -211,24 +214,9 @@ private fun DessertClickerApp(
         DessertClickerScreen(
             revenue = uiState.revenue,
             dessertsSold = uiState.dessertsSold,
-            dessertImageId = currentDessert.imageId,
+            dessertImageId = viewModel.getCurrentImageId(),
             onDessertClicked = {
-
-                // 1. Update score in ViewModel
-                viewModel.onDessertClicked(currentDessert.price)
-
-                // 2. Get updated state AFTER click
-                val updatedState = viewModel.uiState
-
-                // 3. Compute next dessert
-                val dessertToShow = determineDessertToShow(
-                    desserts,
-                    updatedState.dessertsSold
-                )
-
-                // 4. Update index in ViewModel
-                val newIndex = desserts.indexOf(dessertToShow)
-                viewModel.updateDessert(newIndex)
+                viewModel.onDessertClicked(desserts)
             },
             modifier = Modifier.padding(contentPadding)
         )
