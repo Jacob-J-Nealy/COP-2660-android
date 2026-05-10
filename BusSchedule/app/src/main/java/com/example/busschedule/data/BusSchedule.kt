@@ -15,7 +15,6 @@
  */
 package com.example.busschedule.data
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -26,14 +25,16 @@ import androidx.room.PrimaryKey
  * Additionally, an ID is needed as a unique identifier for
  * each row in the database.
  */
-@Entity(tableName = "Schedule")
+
+@Entity(tableName = "bus_schedule")
 data class BusSchedule(
-    @PrimaryKey
-    val id: Int,
-    @NonNull
+
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+
     @ColumnInfo(name = "stop_name")
     val stopName: String,
-    @NonNull
+
     @ColumnInfo(name = "arrival_time")
     val arrivalTimeInMillis: Int
 )
