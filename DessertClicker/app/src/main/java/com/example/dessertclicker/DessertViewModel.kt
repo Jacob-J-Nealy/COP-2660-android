@@ -11,35 +11,42 @@ class DessertViewModel : ViewModel() {
     var uiState by mutableStateOf(DessertUiState())
         private set
 
-    private var currentDessertPrice = 0
-    private var currentDessertImageId = 0
+    private var desserts: List<Dessert> = emptyList()
 
-    fun initialize(desserts: List<Dessert>) {
-        if (currentDessertPrice == 0) {
-            currentDessertPrice = desserts[0].price
-            currentDessertImageId = desserts[0].imageId
+    fun setDesserts(list: List<Dessert>) {
+        desserts = list
+    }
+
+    fun getCurrentDessert(): Dessert {
+        return desserts.getOrElse(uiState.currentDessertIndex) {
+            desserts.first()
         }
     }
 
-    fun onDessertClicked(desserts: List<Dessert>) {
+    fun onDessertClicked() {
+        if (desserts.isEmpty()) return
+
+        val currentDessert = getCurrentDessert()
+
+        val newSold = uiState.dessertsSold + 1
+        val newRevenue = uiState.revenue + currentDessert.price
+        val newIndex = determineIndex(newSold)
 
         uiState = uiState.copy(
-            revenue = uiState.revenue + currentDessertPrice,
-            dessertsSold = uiState.dessertsSold + 1
+            dessertsSold = newSold,
+            revenue = newRevenue,
+            currentDessertIndex = newIndex
         )
-
-        val dessertToShow = determineDessertToShow(
-            desserts,
-            uiState.dessertsSold
-        )
-
-        uiState = uiState.copy(
-            currentDessertIndex = desserts.indexOf(dessertToShow)
-        )
-
-        currentDessertPrice = dessertToShow.price
-        currentDessertImageId = dessertToShow.imageId
     }
 
-    fun getCurrentImageId(): Int = currentDessertImageId
+    private fun determineIndex(sold: Int): Int {
+        var index = 0
+
+        for (i in desserts.indices) {
+            if (sold >= desserts[i].startProductionAmount) {
+                index = i
+            } else break
+        }
+        return index
+    }
 }

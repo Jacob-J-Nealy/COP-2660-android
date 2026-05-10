@@ -179,11 +179,14 @@ private fun DessertClickerApp(
     desserts: List<Dessert>
 ) {
     val viewModel: DessertViewModel = viewModel()
-    val uiState = viewModel.uiState
 
-    LaunchedEffect(Unit) {
-        viewModel.initialize(desserts)
+    // ✅ run ONCE only
+    androidx.compose.runtime.LaunchedEffect(Unit) {
+        viewModel.setDesserts(desserts)
     }
+
+    val uiState = viewModel.uiState
+    val currentDessert = viewModel.getCurrentDessert()
 
     Scaffold(
         topBar = {
@@ -214,9 +217,9 @@ private fun DessertClickerApp(
         DessertClickerScreen(
             revenue = uiState.revenue,
             dessertsSold = uiState.dessertsSold,
-            dessertImageId = viewModel.getCurrentImageId(),
+            dessertImageId = currentDessert.imageId,
             onDessertClicked = {
-                viewModel.onDessertClicked(desserts)
+                viewModel.onDessertClicked()
             },
             modifier = Modifier.padding(contentPadding)
         )
