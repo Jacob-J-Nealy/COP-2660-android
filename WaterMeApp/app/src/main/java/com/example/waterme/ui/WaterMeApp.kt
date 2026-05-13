@@ -153,9 +153,9 @@ fun ReminderDialogContent(
 ) {
     val reminders = listOf(
         Reminder(R.string.five_seconds, FIVE_SECONDS, TimeUnit.SECONDS, plantName),
-        Reminder(R.string.one_day, ONE_DAY, TimeUnit.DAYS, plantName),
-        Reminder(R.string.one_week, SEVEN_DAYS, TimeUnit.DAYS, plantName),
-        Reminder(R.string.one_month, THIRTY_DAYS, TimeUnit.DAYS, plantName)
+        Reminder(R.string.one_minute, 1, TimeUnit.MINUTES, plantName),
+        Reminder(R.string.two_minutes, 2, TimeUnit.MINUTES, plantName),
+        Reminder(R.string.three_minutes, 3, TimeUnit.MINUTES, plantName)
     )
 
     AlertDialog(
